@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://boynton-works.netlify.app/sitemap-index.xml
+Sitemap: https://boyntonbeach.online/sitemap-index.xml
