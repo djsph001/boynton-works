@@ -1,0 +1,66 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base title="List your service" description="Offer your skills to people in Boynton Beach. No accounts, no fees.">
+  <div class="container">
+    <h1>List your service</h1>
+    <p class="page-intro">
+      Do you have a skill that could help someone in Boynton Beach?
+      List it here. No accounts, no fees, no middleman.
+    </p>
+
+    <div class="info-box">
+      <h2>How it works</h2>
+      <ol>
+        <li>Fill out the form below or email us directly.</li>
+        <li>We review your listing to make sure it fits the community.</li>
+        <li>Your service goes live. People contact you directly.</li>
+      </ol>
+    </div>
+
+    <form class="submit-form" action="mailto:dale@emergencecollective.live" method="post" enctype="text/plain">
+      <div class="form-group">
+        <label for="name">Your name</label>
+        <input type="text" id="name" name="name" required />
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" required />
+      </div>
+
+      <div class="form-group">
+        <label for="service">What do you offer?</label>
+        <input type="text" id="service" name="service" placeholder="e.g., Lawn care, Website help, Tutoring" required />
+      </div>
+
+      <div class="form-group">
+        <label for="description">Describe it in a few sentences</label>
+        <textarea id="description" name="description" rows="4" required></textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="price">Typical price or range (optional)</label>
+        <input type="text" id="price" name="price" placeholder="e.g., $50–$100 or ' negotiable'" />
+      </div>
+
+      <div class="form-group">
+        <label for="location">Where do you work?</label>
+        <select id="location" name="location">
+          <option value="boynton-beach">Boynton Beach</option>
+          <option value="palm-beach-county">Palm Beach County</option>
+          <option value="remote">Remote / Online</option>
+        </select>
+      </div>
+
+      <button type="submit" class="btn btn-primary">Send listing</button>
+    </form>
+
+    <p class="form-note">
+      Prefer email? Send your listing directly to
+      <a href="mailto:dale@emergencecollective.live">dale@emergencecollective.live</a>
+      with your name, what you offer, and how to reach you.
+    </p>
+  </div>
+</Base>

@@ -1,0 +1,87 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+
+const services = await getCollection('services', ({ data }) => data.active);
+const providers = await getCollection('providers', ({ data }) => data.active);
+const featuredServices = services.filter(s => s.data.featured).sort((a, b) => a.data.order - b.data.order);
+const featuredProviders = providers.filter(p => p.data.featured);
+---
+
+<Base title="Home" description="Find someone local. Offer what you do. Boynton Works is a community service directory for Boynton Beach, Florida.">
+  <section class="hero">
+    <div class="container">
+      <h1 class="hero-title">Find someone local.<br />Offer what you do.</h1>
+      <p class="hero-subtitle">Boynton Works is a community service directory for Boynton Beach, Florida.</p>
+      <div class="hero-actions">
+        <a href="/browse" class="btn btn-primary">I need a service</a>
+        <a href="/list-your-service" class="btn btn-secondary">I offer a service</a>
+      </div>
+    </div>
+  </section>
+
+  {featuredServices.length > 0 && (
+    <section class="section">
+      <div class="container">
+        <h2 class="section-title">Featured services</h2>
+        <div class="card-grid">
+          {featuredServices.map((service) => (
+            <a href={`/services/${service.id}`} class="card">
+              <h3 class="card-title">{service.data.name}</h3>
+              <p class="card-summary">{service.data.summary}</p>
+              <p class="card-meta">{service.data.priceRange} · {service.data.deliveryTime}</p>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  {featuredProviders.length > 0 && (
+    <section class="section">
+      <div class="container">
+        <h2 class="section-title">Local providers</h2>
+        <div class="card-grid">
+          {featuredProviders.map((provider) => (
+            <a href={`/providers/${provider.id}`} class="card">
+              <h3 class="card-title">{provider.data.name}</h3>
+              <p class="card-summary">{provider.data.tagline}</p>
+              <p class="card-meta">{provider.data.location}</p>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <section class="section section-alt">
+    <div class="container">
+      <h2 class="section-title">How it works</h2>
+      <div class="steps">
+        <div class="step">
+          <span class="step-number">1</span>
+          <h3>Browse</h3>
+          <p>Look through local services and find someone who can help.</p>
+        </div>
+        <div class="step">
+          <span class="step-number">2</span>
+          <h3>Contact</h3>
+          <p>Reach out directly. No middleman, no fees, no accounts.</p>
+        </div>
+        <div class="step">
+          <span class="step-number">3</span>
+          <h3>Get it done</h3>
+          <p>Work directly with the provider. You keep the relationship.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-section">
+    <div class="container">
+      <h2>Have a skill to share?</h2>
+      <p>List your service and reach people in Boynton Beach who need what you do.</p>
+      <a href="/list-your-service" class="btn btn-primary">List your service</a>
+    </div>
+  </section>
+</Base>

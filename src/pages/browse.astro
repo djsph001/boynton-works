@@ -1,0 +1,48 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+
+const services = await getCollection('services', ({ data }) => data.active);
+const categories = await getCollection('categories', ({ data }) => data.active);
+const providers = await getCollection('providers', ({ data }) => data.active);
+
+const sortedCategories = categories.sort((a, b) => a.data.order - b.data.order);
+---
+
+<Base title="Browse services" description="Browse local services in Boynton Beach, Florida.">
+  <div class="container">
+    <h1>Browse services</h1>
+    <p class="page-intro">Local people offering practical help in Boynton Beach.</p>
+
+    {sortedCategories.map((category) => {
+      const categoryServices = services
+        .filter(s => s.data.category === category.id)
+        .sort((a, b) => a.data.order - b.data.order);
+      if (categoryServices.length === 0) return null;
+      return (
+        <section class="category-section">
+          <h2 class="category-title">{category.data.name}</h2>
+          <p class="category-description">{category.data.description}</p>
+          <div class="card-grid">
+            {categoryServices.map((service) => {
+              const provider = providers.find(p => p.id === service.data.provider);
+              return (
+                <a href={`/services/${service.id}`} class="card">
+                  <h3 class="card-title">{service.data.name}</h3>
+                  <p class="card-summary">{service.data.summary}</p>
+                  <p class="card-meta">
+                    {provider?.data.name} · {service.data.priceRange}
+                  </p>
+                </a>
+              );
+            })}
+          </div>
+        </section>
+      );
+    })}
+
+    {services.length === 0 && (
+      <p>No services listed yet. Be the first — <a href="/list-your-service">list your service</a>.</p>
+    )}
+  </div>
+</Base>

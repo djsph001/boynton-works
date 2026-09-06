@@ -1,0 +1,50 @@
+---
+import { getCollection, render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+
+export async function getStaticPaths() {
+  const providers = await getCollection('providers', ({ data }) => data.active);
+  return providers.map((provider) => ({
+    params: { slug: provider.id },
+    props: { provider },
+  }));
+}
+
+const { provider } = Astro.props;
+const services = await getCollection('services', ({ data }) => data.active && data.provider === provider.id);
+const { Content } = await render(provider);
+---
+
+<Base title={provider.data.name} description={provider.data.tagline}>
+  <div class="container">
+    <h1>{provider.data.name}</h1>
+    <p class="provider-tagline">{provider.data.tagline}</p>
+    <p class="provider-location">{provider.data.location}</p>
+
+    <div class="provider-bio">
+      <Content />
+    </div>
+
+    {services.length > 0 && (
+      <section class="provider-services">
+        <h2>Services</h2>
+        <div class="card-grid">
+          {services.map((service) => (
+            <a href={`/services/${service.id}`} class="card">
+              <h3 class="card-title">{service.data.name}</h3>
+              <p class="card-summary">{service.data.summary}</p>
+              <p class="card-meta">{service.data.priceRange} · {service.data.deliveryTime}</p>
+            </a>
+          ))}
+        </div>
+      </section>
+    )}
+
+    <div class="contact-box">
+      <h2>Contact</h2>
+      <p>Email: <a href={`mailto:${provider.data.email}`}>{provider.data.email}</a></p>
+      {provider.data.phone && <p>Phone: <a href={`tel:${provider.data.phone}`}>{provider.data.phone}</a></p>}
+      {provider.data.website && <p>Website: <a href={provider.data.website}>{provider.data.website}</a></p>}
+    </div>
+  </div>
+</Base>
