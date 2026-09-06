@@ -2,7 +2,7 @@
 name: Dale Joseph
 tagline: Practical technology help for people in Boynton Beach
 location: Boynton Beach, Florida
-email: dale@emergencecollective.live
+email: dalejsph@gmail.com
 bio: |
   I help local people and small businesses understand their technology.
   Not a consultant — just someone who reads the code, checks the facts,
