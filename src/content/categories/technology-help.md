@@ -1,5 +1,5 @@
 ---
-name: Technology Help
+name: Tech Help
 description: Websites, software, and data — practical help for everyday problems.
 order: 1
 active: true

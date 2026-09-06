@@ -12,6 +12,7 @@ export async function getStaticPaths() {
 
 const { provider } = Astro.props;
 const services = await getCollection('services', ({ data }) => data.active && data.provider === provider.id);
+services.sort((a, b) => a.data.order - b.data.order);
 const { Content } = await render(provider);
 ---
 

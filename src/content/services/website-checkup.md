@@ -37,5 +37,3 @@ that is not bringing them customers or that they are embarrassed to share.
 ## Pricing
 
 Fixed price: $150–$250, depending on site size.
-
-The checkup stands on its own. You are not obligated to hire anyone for fixes.

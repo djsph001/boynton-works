@@ -33,9 +33,9 @@ This is not a comprehensive forensic or security audit. It is a narrow,
 independent look at a specific concern.
 
 If your situation needs a deeper review — full architecture analysis, test
-verification, claims validation — that is a separate professional service
-with a different scope and price. I will tell you plainly if that is what
-you need.
+verification, whether the code actually does what you were told it does —
+that is a separate professional service with a different scope and price.
+I will tell you plainly if that is what you need.
 
 ## How it works
 

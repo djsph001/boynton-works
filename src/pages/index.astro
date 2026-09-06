@@ -23,7 +23,7 @@ const featuredProviders = providers.filter(p => p.data.featured);
   {featuredServices.length > 0 && (
     <section class="section">
       <div class="container">
-        <h2 class="section-title">Featured services</h2>
+        <h2 class="section-title">Services</h2>
         <div class="card-grid">
           {featuredServices.map((service) => (
             <a href={`/services/${service.id}`} class="card">
